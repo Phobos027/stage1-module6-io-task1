@@ -22,9 +22,17 @@ public class FileReader {
             while ((ch = fileInputStream.read()) != -1) {
                 text.append((char) ch);
             }
-            fileInputStream.close();
+
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (fileInputStream != null) {
+                    fileInputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         String[] splitText = text.toString().split(System.lineSeparator());

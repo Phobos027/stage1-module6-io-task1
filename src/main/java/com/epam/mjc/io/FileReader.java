@@ -2,26 +2,42 @@ package com.epam.mjc.io;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
 public class FileReader {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Profile profile = getDataFromFile(new File("src/main/resources/Profile.txt"));
 
         System.out.println(profile);
     }
 
-    public static Profile getDataFromFile(File file) throws IOException {
+    public static Profile getDataFromFile(File file) {
         Profile profile = new Profile();
-        FileInputStream fileInputStream = new FileInputStream(file);
+        FileInputStream fileInputStream = null;
+        try {
+            fileInputStream = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         String text = "";
         int ch = 0;
 
-        while ((ch = fileInputStream.read()) != -1) {
-            text += ((char) ch);
+        try {
+            while ((ch = fileInputStream.read()) != -1) {
+                text += ((char) ch);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fileInputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        fileInputStream.close();
 
         String[] splitText = text.split(System.lineSeparator());
 

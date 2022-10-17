@@ -6,7 +6,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,7 +39,7 @@ public class FileReaderTest {
     }
 
     @Test
-    public void testProgramReadsDataCorrectly () throws IOException {
+    public void testProgramReadsDataCorrectly (){
         FileReader fileReader = new FileReader();
         Profile actual = fileReader.getDataFromFile(new File(TEST_FILE.toUri()));
         assertEquals(profile, actual);

@@ -9,7 +9,7 @@ import java.io.IOException;
 public class FileReader {
     public static void main(String[] args) {
         Profile profile = getDataFromFile(new File("src/main/resources/Profile.txt"));
-        System.out.println(profile);
+        System.err.print(profile);
     }
 
     public static Profile getDataFromFile(File file) {
@@ -22,7 +22,6 @@ public class FileReader {
             while ((ch = fileInputStream.read()) != -1) {
                 text.append((char) ch);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
